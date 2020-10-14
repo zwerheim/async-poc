@@ -1,0 +1,121 @@
+openapi: 3.0.0
+info:
+  version: '0.1'
+  title: Axial Async Poc
+  description: 'A sample POC to demonstrate connexion, apihttp, and openapi 3.0'
+
+servers:
+  - url: /v1.0
+
+paths:
+  /echo:
+    get:
+      summary: 'Echo Endpoint - Search - Echos back what you give it 5 times'
+      parameters:
+        - name: echo_string
+          in: query
+          description: 'String to echo'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A response containing a '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/echo_multi_response'
+    post:
+      summary: 'Echo Endpoint - Setup to simulate a 500 error'
+      parameters:
+        - name: echo_string
+          in: query
+          description: 'String to echo'
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_obj'
+
+  /echo/{echo_id}:
+    summary: "Returns a list of echo - Echoing what was given as input"
+    parameters:
+      - name: echo_id
+        in: path
+        description: 'Echo ID'
+        required: true
+        schema:
+          type: string
+    get:
+      summary: 'Echo Endpoint - Echos back what you give it'
+      parameters:
+        - name: echo_string
+          in: query
+          description: 'String to echo'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A response containing a '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/echo_response'
+
+
+components:
+  schemas:
+    echo:
+      type: object
+      properties:
+        echo:
+          type: string
+          description: "String to echo back"
+      required:
+        - echo
+
+    echo_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/echo'
+      required:
+        - data
+
+    echo_multi_response:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            echo:
+              type: array
+              items:
+                $ref: '#/components/schemas/echo'
+
+    error_obj:
+      title: error_obj
+      type: object
+      properties:
+        type:
+          type: string
+          description: "Optional Content-Type"
+          example: "text/plain"
+        title:
+          type: string
+          description: "HTTP status reason for the exception"
+          example: "Internal Server Error"
+        detail:
+          type: string
+          description: "Details of what went wrong"
+          example: "The following parameters are not supported: {'foo'}"
+        status:
+          type: integer
+          description: "Status code of what the error was"
+          example: "400"

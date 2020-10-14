@@ -20,7 +20,7 @@ def create_app():
         resolver=RestyResolver('api'),
         strict_validation=True,
         validate_responses=True,
-        pass_context_arg_name='request'
+        pass_context_arg_name='request'  # aiohttp param to pass the context into each request - gets headers, etc
     )
     return app.app
 

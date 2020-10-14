@@ -1,17 +1,4 @@
-import connexion
-from marshmallow.fields import String
-from marshmallow import Schema
-
 from aiohttp import web
-
-
-class GetPeopleSchema(Schema):
-    """ Validation class for GET change """
-    echo_string = String()
-
-
-class HttpError(Exception):
-    code=500
 
 
 async def search(echo_string, request):
@@ -19,7 +6,9 @@ async def search(echo_string, request):
         'echo': echo_string
     }
     return web.json_response({
-        'data': [reponse, reponse, reponse, reponse, reponse]
+        'data': {
+            'echo': [reponse, reponse, reponse, reponse, reponse]
+        }
     })
 
 

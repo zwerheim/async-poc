@@ -1,4 +1,4 @@
-# Sanci vs AIOHTTP
+# Sanic vs AIOHTTP
 
 ## Sanic
 

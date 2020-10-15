@@ -32,5 +32,5 @@
 
 ## Conclusions
 
-Performance and support are comparible between both frameworks. Both also have great community support. The one major different is our desrire to support the API-First style for these servers. The `connexion` package enables this, and only supports AioHttp at this time.
+Performance and support are comparible between both frameworks. Both also have great community support. The one major different is our desrire to support the API-First style for these servers. The `connexion` package enables this and only supports AioHttp at this time. So we will likely go with AioHttp as our main server framework moving forward.
 

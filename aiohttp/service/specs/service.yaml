@@ -41,6 +41,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_obj'
+        'default':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_obj'
 
   /echo/{echo_id}:
     summary: "Returns a list of echo - Echoing what was given as input"
@@ -53,6 +59,7 @@ paths:
           type: string
     get:
       summary: 'Echo Endpoint - Echos back what you give it'
+      operationId: api.echo.get_echo_test
       parameters:
         - name: echo_string
           in: query
@@ -60,6 +67,7 @@ paths:
           required: true
           schema:
             type: string
+          x-example: "test string"
       responses:
         '200':
           description: 'A response containing a '

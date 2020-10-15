@@ -1,0 +1,2 @@
+sanic-openapi==0.6.2
+sanic==20.9.0
